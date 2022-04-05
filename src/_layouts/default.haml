@@ -1,0 +1,11 @@
+%html
+  %head{ lang: site.locale }
+    = render "head", metadata: site.metadata, title: resource.data.title
+
+  %body{ class: "#{resource.data.layout} #{resource.data.page_class}" }
+    = render Shared::Navbar.new(metadata: site.metadata, resource: resource)
+  
+    %main
+      = yield
+    
+    = render "footer", metadata: site.metadata

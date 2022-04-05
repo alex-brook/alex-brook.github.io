@@ -1,0 +1,14 @@
+%meta{ charset: "utf-8" }
+%meta{ name: "viewport", content: "width=device-widht, initial-scale=1.0" }
+
+- resource_title = strip_html(strip_newlines(title))
+- if resource_title == "Index"
+  %title #{metadata.title}: #{metadata.tagline}
+- else
+  %title #{resource_title} | #{metadata.title}
+
+%meta{ name: "description", content: metadata.description }
+
+%link{ rel: "stylesheet", href: (webpack_path :css) }
+%script{ src: (webpack_path :js), defer: true }
+= live_reload_dev_js
