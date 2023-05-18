@@ -1,0 +1,17 @@
+{
+  "name": "alex-brook.github.io",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node build.js",
+    "build": "node build.js --release"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.17.19",
+    "tiny-glob": "^0.2.9"
+  }
+}
