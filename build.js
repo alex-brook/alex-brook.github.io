@@ -3,7 +3,7 @@ import { globSync } from 'glob'
 import { pugPlugin } from './esbuild-plugin-pug.js'
 
 const isRelease = process.argv.some(arg => arg == '--release')
-const globbedEntrypoints = globSync("src/**/index.pug")
+const globbedEntrypoints = globSync("src/**/*.pug")
 const liveReloadSnippet = "(() => { new EventSource('esbuild').addEventListener('change', () => location.reload()) })();" 
 
 // find all the post directories so we can render a list of them in the index
