@@ -1,10 +1,23 @@
 import * as esbuild from 'esbuild'
-import glob from 'tiny-glob'
+import { globSync } from 'glob'
 import { pugPlugin } from './esbuild-plugin-pug.js'
 
 const isRelease = process.argv.some(arg => arg == '--release')
-const globbedEntrypoints = await glob("src/**/*.pug")
+const globbedEntrypoints = globSync("src/**/index.pug")
 const liveReloadSnippet = "(() => { new EventSource('esbuild').addEventListener('change', () => location.reload()) })();" 
+
+// find all the post directories so we can render a list of them in the index
+const pugGlobals = () => {
+  const postPaths = globSync('src/posts/*')
+  const postFiles = globSync('src/posts/*.*')
+  const postDirectories = postPaths
+    .filter(path => !postFiles.includes(path))
+    .map(path => path.replace('src/', ''))
+
+  return {
+    postDirectories: postDirectories,
+  }
+}
 
 const config = {
   entryPoints: [
@@ -15,14 +28,11 @@ const config = {
   bundle: true,
   metafile: true,
   outdir: 'dist/',
-  loader: {
-    '.html': 'copy',
-  },
   banner: {
     js: isRelease ? '' : liveReloadSnippet
   },
   plugins: [
-    pugPlugin
+    pugPlugin(pugGlobals)
   ]
 }
 
