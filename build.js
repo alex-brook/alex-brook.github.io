@@ -1,8 +1,9 @@
 import * as esbuild from 'esbuild'
 import glob from 'tiny-glob'
+import { pugPlugin } from './esbuild-plugin-pug.js'
 
 const isRelease = process.argv.some(arg => arg == '--release')
-const globbedEntrypoints = await glob("src/**/*.html")
+const globbedEntrypoints = await glob("src/**/*.pug")
 const liveReloadSnippet = "(() => { new EventSource('esbuild').addEventListener('change', () => location.reload()) })();" 
 
 const config = {
@@ -19,7 +20,10 @@ const config = {
   },
   banner: {
     js: isRelease ? '' : liveReloadSnippet
-  }
+  },
+  plugins: [
+    pugPlugin
+  ]
 }
 
 const serveConfig = {
