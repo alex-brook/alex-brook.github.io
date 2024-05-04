@@ -1,0 +1,12 @@
+name: blog
+
+services:
+  dev:
+    build:
+      context: ./
+    volumes:
+      - ../:/src
+    init: true
+    command: haunt serve --host=0.0.0.0 --watch
+    ports:
+      - 8080:8080

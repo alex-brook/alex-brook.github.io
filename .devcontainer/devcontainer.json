@@ -1,0 +1,23 @@
+{
+  "dockerComposeFile": "./compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/src",
+  "remoteUser": "root",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": true,
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
+        "remote.autoForwardPorts": false,
+        "gitlens.plusFeatures.enabled": false
+      },
+      "extensions": [
+        "eamodio.gitlens",
+        "sjhuangx.vscode-scheme"
+      ]
+    }
+  }
+}
