@@ -1,10 +1,13 @@
-const imports = ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"]
-const languages = ["ruby", "dockerfile"]
-languages.forEach(language => imports.push(`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/${language}.min.js`))
-importScripts(...imports)
+const imports = importScripts("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js")
+const importedLanguages = new Map()
 
 onmessage = (event) => {
   const { i, language, textContent } = event.data
+
+  if (!importedLanguages.get(language)) {
+    importScripts(`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/${language}.min.js`)
+    importedLanguages.set(language, true)
+  }
 
   let result
   if (language) {

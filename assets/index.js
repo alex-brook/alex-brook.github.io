@@ -1,10 +1,11 @@
 window.addEventListener("DOMContentLoaded", () => {
-  const worker = new Worker("assets/worker.js")
+  const worker = new Worker("/assets/worker.js")
   const nodes = Array.from(document.querySelectorAll("code"))
 
   worker.onmessage = (event) => {
     const { i, innerHTML } = event.data
     nodes[i].innerHTML = innerHTML
+    nodes[i].classList.toggle("highlighted", true)
   }
 
   const codeLanguage = (node) => {
