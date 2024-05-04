@@ -22,6 +22,7 @@
       (script (@ (src "/assets/index.js")))
     (body
       (nav
+        (h1 "Alex's Site")
         (a (@ (href "/")) "Home"))
       (main ,body))))
 
@@ -37,8 +38,10 @@
   `((h1 ,title)
     ,(map (lambda (post)
       (let* ((post-uri (string-append prefix "/" (site-post-slug site post) ".html"))
-             (post-title (post-ref post 'title)))
-        `(a (@ (href ,post-uri)) ,post-title)))
+             (post-title (post-ref post 'title))
+             (post-summary (assq-ref (post-metadata post) 'summary)))
+        `((a (@ (href ,post-uri)) ,(string-append post-title "\t(" (date->string(post-date post) "~d ~B ~Y") ")"))
+          (p ,post-summary))))
       posts)))
 
 (define blog-theme

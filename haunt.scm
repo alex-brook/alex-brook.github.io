@@ -5,6 +5,7 @@
   (haunt builder blog)
   (haunt builder atom)
   (haunt builder assets)
+  (haunt post)
   (haunt reader commonmark)
   (haunt site)
   (theme))
@@ -16,7 +17,8 @@
   #:builders
     (list
       (blog
-        #:theme blog-theme)
+        #:theme blog-theme
+        #:prefix "posts"
+        #:collections `(("Posts" "index.html" ,posts/reverse-chronological)))
       (atom-feed)
-      (atom-feeds-by-tag)
       (static-directory "assets")))
