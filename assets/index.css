@@ -113,18 +113,20 @@ code {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.5rem;
 
   .tag {
     font-family: "Open Sans";
     font-weight: 700;
-    max-height: 1.5rem;
     padding: 0;
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: var(--border-radius);
     background-color: var(--foreground-color);
-    font-size: medium;
+    font-size: small;
     color: var(--background-color);
+    height: 1.25rem;
+    line-height: 1.25rem;
   }
 }
